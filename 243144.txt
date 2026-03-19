@@ -1,0 +1,40 @@
+Nikola@DESKTOP-DCVCD3B MINGW64 ~/Desktop/test (master)
+13.
+$ git merge feature-search-books
+Updating 4d1178e..e079088
+Fast-forward
+ SI2026Lab1Main.java | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+Ги употребив командите:
+git checkout master
+git merge
+Спојувањето беше fast forward
+
+$  git log --oneline --graph --all
+* e079088 (HEAD -> master, origin/feature-search-books, feature-search-books) Implement book search
+* 4d1178e (origin/master) Add starter code
+* 44ccaa1 Initial commit
+
+Nikola@
+
+22.Да, настана конфликт во фајлот:
+SI2026Lab1Main.java
+Конфликтот беше поради различни пораки за успешно позајмување на книга:
+feature-borrow-book → "Borrowed successfully."
+master → "Book checked out."
+Го решив конфликтот со отворање на фајлот SI2026Lab1Main.java, бришење на marker-ите од Git (<<<<<<<, =======, >>>>>>>), ги оставив финалните линии со порака по мој избор, го додадов фајлот со git add SI2026Lab1Main.java, и на крај направив merge со git commit. Употребен е recursive merge на Git, бидејќи спојувањето е на гранка во која се промени истиот фајл.
+
+Излез од командата git status по завршување на merge:
+
+On branch feature-borrow-book
+Your branch is up to date with 'origin/feature-borrow-book'.
+
+nothing to commit, working tree clean
+
+23. Ова спојување беше fast-forward бидејќи master немаше нови commits по последен common ancestor со feature-genre-report. Затоа Git само го премести master на последниот commit од feature-genre-report.
+24.Спојувањето беше рекурзивно бидејќи: 
+-master веќе имаше свои commits (на пример, merge од feature-genre-report и Update borrow message)
+-feature-borrow-book имаше свои commits (Implement borrow book + претходно merge со master)
+
+Бидејќи двата branch-а имаа различни commits по последниот common ancestor, Git не можеше само да го помести pointerot и мораше да создаде нов merge commit Затоа merge е recursive и не е fast-forward.
