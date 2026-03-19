@@ -91,8 +91,18 @@ class Library {
         System.out.println("Book not found.");
     }
 
-    // TODO: Implement in branch feature-genre-report
     public void printBooksByGenre(String genre) {
+        boolean found = false;
+
+        for(Book book : books) {
+            if (book.getGenre().equalsIgnoreCase(genre)) {
+                System.out.println(book);
+                found = true;
+            }
+        }
+        if(!found) {
+            System.out.println("No books found for this genre.");
+        }
     }
 
     public int countAvailableBooks() {
@@ -129,5 +139,6 @@ public class SI2026Lab1Main {
         } else {
             System.out.println("Book does not exist.");
         }
+        library.printBooksByGenre("Programming");
     }
 }
